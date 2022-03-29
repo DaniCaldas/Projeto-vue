@@ -2,14 +2,14 @@
        <br>
        <div >
        <h4>Nome</h4>
-       <input class="input-name" type="text" v-model="Nome">
+       <input class="input-name" placeholder="Daniel Caldas" type="text" v-model="Nome">
        
        <br> <br>
 
        <h4>Telefone
 
        </h4>
-       <input class="input-number" type="text" placeholder="(00)0000-0000"  v-model='Telefone'>
+       <input class="input-number" type="text" placeholder="(00)0000-0000" maxlength="12"  v-model='Telefone'>
        <br> <br>
     </div>
        <h4>E-mail</h4>
@@ -35,6 +35,26 @@
 .input-name:hover{
      cursor: pointer;
 }
+.input-name:invalid{
+       border-color: red;
+    box-shadow: 0px 0px 3px crimson;
+}
+.input-name:focus:invalid{
+    outline: none;
+}
+
+.input-number:hover{
+    cursor: pointer;
+}
+.input-number:invalid{
+       border-color: red;
+    box-shadow: 0px 0px 3px crimson;
+}
+.input-number:focus:invalid{
+    outline: none;
+}
+
+
 .btn-primary{
     width: 120px;
     border-radius:4px ;
@@ -43,18 +63,21 @@
     transition: .6s;
 }
 
+
 .input-email:focus{
    background-color: whitesmoke;
     caret-color: red;
 }
-
 .input-email:hover{
     cursor: pointer;
 }
-
-.input-number:hover{
-    cursor: pointer;
+.input-email:invalid{
+    border-color: red;
+    box-shadow: 0px 0px 3px crimson;
 }
+.input-email:focus:invalid{
+    outline: none;
+} 
 </style>
 
 <script>
@@ -68,18 +91,40 @@ export default {
      },
              methods:{
             Logar(){
-                if(this.Nome=='' && this.Nome==0 && this.Telefone=='' || this.Telefone == String && this.email=='' || this.email.length != '@gmail.com' ) {
-                    window.alert('Dados inválidos')
+                if(this.Nome == '' && this.Nome == 0)
+                {
+                    window.alert('Nome inválido')
+
+
+                    //limpeza padrão 
                     this.Nome=''
                     this.Telefone=''
                     this.email=''
-                }else{
+                }
+                if (this.Telefone == '' && this.Telefone == String) {
+                    window.alert('Telefone inválido')
 
+                    //limpeza padrão 
+                    this.Nome=''
+                    this.Telefone=''
+                    this.email=''
+                } 
+                if (this.email == '' && this.email == 0 && !this.email.checkValitity()) {
+                    window.alert('Email inválido')
+
+                    //limpeza padrão 
+                    this.Nome=''
+                    this.Telefone=''
+                    this.email=''
+                } 
+               
+                else{
                 //método para mostrar os dados diretamente ao clicar no botão
                 this.$emit('add-todo',{
                     Nome:this.Nome,
                     Telefone:this.Telefone,
-                    email:this.email
+                    email:this.email,
+                
                 });
                     this.Nome=''
                     this.Telefone=''

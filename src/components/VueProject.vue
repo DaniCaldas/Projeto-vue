@@ -35,7 +35,7 @@ export default{
                 this.dados.splice(index, 1)
                 console.log(Date.now(),this.dados) 
             },
-        }
+        },
 }
 </script>
 <style>
