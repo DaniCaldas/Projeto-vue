@@ -14,7 +14,11 @@
         </div>
 </div> 
 </template>
-
+<style scoped>
+    .container{
+        background-color: #f4f7f8;
+    }
+</style>
 
 <script>
 import FormTodo from './FormTodo.vue';
